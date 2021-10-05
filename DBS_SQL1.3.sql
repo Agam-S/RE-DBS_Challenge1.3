@@ -181,3 +181,35 @@ INNER JOIN CLIENT C ON O.ClientID = C.ClientID
 INNER JOIN Organisation OG ON OG.OrgID = C.OrgID
 INNER JOIN ORDERLINE OL ON O.ClientID = OL.ClientID AND O.OrderDate = OL.OrderDate
 INNER JOIN MENUITEM M ON OL.ItemID = M.ItemID
+
+-- =====================Task 6=============================
+-- Checking Query 1-
+    Select COUNT(*) FROM ORDERLINE -- = 13 lines
+    --Query 1 also gives 13 lines, meaning that theres is no duplicate data
+
+-- Checking Query 2
+    
+    SELECT SUM(QTY) AS 'Total QTY Ordered'
+    FROM MenuItem M
+    INNER JOIN OrderLine OL ON OL.ITEMID = M.ItemID
+    INNER JOIN Client C ON OL.ClientID = C.ClientID
+    INNER JOIN Organisation OG ON C.OrgID = OG.OrgID
+    -- According to the code above - 
+    -- the total number of orders were 20 and Query 2's qty in total is 20
+    -- meaning that 20 is right answer and;
+    -- in query 2- they got grouped by OrgID WHICH query 2 wanted.
+    -- ALSO JUST to make sure-
+    -- For query 2 -I crossed checked with Sample data to see if the data is correct
+    -- FOR example - small pizza was ordered by 3 times by both organisations
+
+    
+-- Checking Query 3
+    -- For Query 3-  
+    Select * from MenuItem M
+    -- The highest number in UnitPrice is 23.
+    -- and Query 3 Returns 23 as the only answer meaning highest number is correct.
+    Select ClientId OL, M.UnitPrice from OrderLine OL
+    INNER JOIN MenuItem M ON OL.ITEMID = M.ItemID 
+    -- The Code above told me that Client with ID 21 is the only one ordered food with the price of 23.
+    -- Also Query 3 only returned Client with 21 ID who ordered food with 23 price.
+    -- So Query 3 is correct.
