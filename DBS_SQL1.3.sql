@@ -171,3 +171,13 @@ where (UnitPrice = (
     FROM MenuItem M 
 )
 )
+
+-- =====================Task 5=============================
+
+CREATE VIEW [DBS_VIEW1] AS
+Select OG.OrganisationName, C.Name, OL.OrderDate, O.DeliveryAddress, M.Description, OL.Qty 
+FROM ORDERS O
+INNER JOIN CLIENT C ON O.ClientID = C.ClientID
+INNER JOIN Organisation OG ON OG.OrgID = C.OrgID
+INNER JOIN ORDERLINE OL ON O.ClientID = OL.ClientID AND O.OrderDate = OL.OrderDate
+INNER JOIN MENUITEM M ON OL.ItemID = M.ItemID
