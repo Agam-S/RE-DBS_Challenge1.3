@@ -144,3 +144,30 @@ INSERT INTO ORDERLINE(ItemID, ClientID, OrderDate, Qty) VALUES
 
 -- ==========================Task 4=============================
 
+-- Query 1:
+
+Select OG.OrganisationName, C.Name, OL.OrderDate, O.DeliveryAddress, M.Description, OL.Qty 
+FROM ORDERS O
+INNER JOIN CLIENT C ON O.ClientID = C.ClientID
+INNER JOIN Organisation OG ON OG.OrgID = C.OrgID
+INNER JOIN ORDERLINE OL ON O.ClientID = OL.ClientID AND O.OrderDate = OL.OrderDate
+INNER JOIN MENUITEM M ON OL.ItemID = M.ItemID
+
+-- Query 2:
+SELECT OG.OrgID, M.Description, SUM(QTY) AS 'Total QTY Ordered'
+FROM MenuItem M
+INNER JOIN OrderLine OL ON OL.ITEMID = M.ItemID
+INNER JOIN Client C ON OL.ClientID = C.ClientID
+INNER JOIN Organisation OG ON C.OrgID = OG.OrgID
+GROUP BY OG.OrgID, M.Description
+ORDER BY OrgId ASC
+
+-- Query 3: 
+SELECT OL.ItemID, OL.ClientID, OL.OrderDate, OL.Qty , M.UnitPrice, M.Description 
+from OrderLine OL
+INNER JOIN MenuItem M ON OL.ITEMID = M.ItemID
+where (UnitPrice = (
+    SELECT MAX(UnitPrice)
+    FROM MenuItem M 
+)
+)
