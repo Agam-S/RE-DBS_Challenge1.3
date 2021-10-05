@@ -6,8 +6,9 @@
 Organisation(OrgID, OrganisationName)
 Primary Key (OrgID)
 
-Client(ClientID, Name, Phone)
+Client(ClientID, Name, Phone, OrgID)
 Primary Key (ClientID)
+Foreign Key (OrgID) references Organisation(OrgID)
 
 MenuItem(ItemID, Description, ServesPerUnit, UnitPrice)
 Primary Key (ItemID)
